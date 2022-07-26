@@ -48,4 +48,4 @@ GameView o-- BoardView
 GameView o-- ReversiGame
 GameController o-- GameView
 
-@enduml
+@enduml 
