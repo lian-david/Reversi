@@ -1,0 +1,51 @@
+@startuml Reversi
+
+
+class ReversiGame{
+    -board_size
+    +change_player()
+    +make_move()
+    +is_valid_move()
+    +check_winner()
+    +is_terminated()
+}
+
+class Board{
+    -size
+    +get_location()
+    +update_location()
+}
+
+class Players{
+    BLACK_DISK
+    WHITE_DISK
+}
+
+
+class GameView{
+    -game
+    +draw_board()
+    +display_winner()
+    +get_move()
+}
+
+class BoardView{
+    -board
+    +draw_board()
+}
+
+
+class GameController{
+    -model
+    -view
+    +run_game()
+}
+
+GameController o-- ReversiGame
+ReversiGame o-- Board
+ReversiGame o-- Players
+GameView o-- BoardView
+GameView o-- ReversiGame
+GameController o-- GameView
+
+@enduml

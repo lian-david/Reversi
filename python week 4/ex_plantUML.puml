@@ -1,0 +1,19 @@
+@startuml
+
+class Flight {
+    flight_num
+    departure_time
+    departure_airport
+    arrival_time
+    arrival_airport
+    get_flight_num()
+    change_departure_airport()
+}
+
+class Airport {
+    airport_code
+    country
+    city
+}
+
+Flight o-- Airport
