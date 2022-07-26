@@ -52,4 +52,6 @@ class GameConsoleView:
         """
         print("Would you like to start a new game? [s]")
         ans = input("Or would you like to end session? [e] ").lower()
+        if ans != "s" and ans != "e":
+            ans = input("Please enter a valid option: ").lower()
         return ans

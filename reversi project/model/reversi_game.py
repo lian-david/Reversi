@@ -139,5 +139,14 @@ class ReversiGame:
         return self.winner
 
     def is_terminated(self, row, col):
+        scores = self.score_book
+        black_score = scores["X"]
+        white_score = scores["O"]
+
         if self.make_move(row, col) == False:
             return True
+        elif black_score <= 0 >= white_score:
+            return True 
+
+
+       

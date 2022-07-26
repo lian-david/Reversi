@@ -17,10 +17,14 @@ class ReversiUser:
         pass
 
     def display_menu():
-        print("Welcome to Reversi")
+        """Displays starting menu.
+
+        Returns:
+            ans(str): user input
+        """
+        print("----------Welcome to Reversi----------")
         print("Would you like to start a new game? [s]")
         ans = input("Or would you like to end session? [e] ").lower()
         if ans != "s" and ans != "e":
             ans = input("Please enter a valid option: ").lower()
         return ans
-        
