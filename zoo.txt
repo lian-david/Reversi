@@ -1,7 +1,0 @@
-Bob Mammal Bear 300 2
-Lucy Reptile Lizard 2 Nonvenomous
-Carl Reptile Cottonmouth 3 Venomous
-Oliver Bird Ostrich 75 60 Mute
-Polly Bird Parrot 1 2 Talks
-I want a cracker
-Doug Mammal Dog 20 4
