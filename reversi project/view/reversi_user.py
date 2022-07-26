@@ -23,3 +23,4 @@ class ReversiUser:
         if ans != "s" and ans != "e":
             ans = input("Please enter a valid option: ").lower()
         return ans
+        

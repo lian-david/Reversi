@@ -28,5 +28,3 @@ class BoardConsoleView:
                 print(f'| {BoardConsoleView.symbols[cell]} ', end = "")
             print("|")
             print(header + (header * board_size))
-                
-    

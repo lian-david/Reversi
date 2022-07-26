@@ -5,3 +5,4 @@ class Players(IntEnum):
     """
     BLACK_DISK = 1
     WHITE_DISK = 2 
+

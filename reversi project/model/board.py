@@ -49,5 +49,3 @@ class Board:
         """
         return row >= 0 and row <= self.size - 1 \
              and col >= 0 and col <= self.size - 1
-
-    

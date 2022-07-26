@@ -141,5 +141,3 @@ class ReversiGame:
     def is_terminated(self, row, col):
         if self.make_move(row, col) == False:
             return True
-
-        

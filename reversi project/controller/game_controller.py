@@ -27,19 +27,3 @@ class GameController:
                         self.view.display_winner(player)
                         print("Thanks for playing!")
                     break
-
-           
-            
-        
-                
-                
-                
-            
-           
-                
-            
-                
-                    
-            
-
-        

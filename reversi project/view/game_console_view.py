@@ -53,5 +53,3 @@ class GameConsoleView:
         print("Would you like to start a new game? [s]")
         ans = input("Or would you like to end session? [e] ").lower()
         return ans
-
-   
