@@ -13,8 +13,6 @@ class GameController:
     def run_game(self, choice):
         """Runs game
         """
-        today = datetime.now()
-        start = today.strftime("%m/%d/%Y %H:%M:%S")
         while choice == "s":
             while True:
                 self.model.change_player()
@@ -32,7 +30,9 @@ class GameController:
                 else:
                     self.model.make_move(row, col)
             break
+        today = datetime.now()
+        start = today.strftime("%m/%d/%Y %H:%M:%S")
         p_view = self.view.symbols[player]
-        with open("reversi_scores.txt", "w") as f:
-            f.write(f'Date and Time: {start}, Winning Player/Draw: {p_view}, Scores: X: {self.model.score_book["X"]}, O: {self.model.score_book["O"]}')
+        with open("reversi_scores.txt", "a") as f:
+            f.write(f'\nDate and Time: {start}, Winning Player/Draw: {p_view}, Scores: X: {self.model.score_book["X"]}, O: {self.model.score_book["O"]}')
 

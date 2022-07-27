@@ -4,7 +4,11 @@ class ReversiUser:
     def get_board_size():
         """Retreives board size from user
         """
-        board_size = int(input("Enter the board size: "))
+        try: 
+            board_size = int(input("Enter the board size: "))
+        except ValueError:
+            print("Input must be numeric.")
+
         return board_size 
 
     def get_rules():
@@ -28,3 +32,4 @@ class ReversiUser:
         if ans != "s" and ans != "e":
             ans = input("Please enter a valid option: ").lower()
         return ans
+

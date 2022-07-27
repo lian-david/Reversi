@@ -6,10 +6,6 @@ class ReversiGame:
         classical rules, alternative rules.
     """
     def __init__(self, board_size):
-        #board_size = ReversiUser.get_board_size()
-        # rules = ReversiUser.get_rules()
-        # self.rules = rules
-
         self.board = Board(board_size)
         self.curr_player = None
         self.black_disk = Players.BLACK_DISK
@@ -100,6 +96,17 @@ class ReversiGame:
         # else:
         #     return False
 
+    def get_moves(self):
+        """Returns list of valid moves for AI use
+        """
+        valid_moves = []
+        for row in range(self.board.size):
+            for col in range(self.board.size):
+                if self.is_valid_move(row, col) != False:
+                    valid_moves.append([row, col])
+        return valid_moves
+
+    #def computer_move(self):
 
     def get_scores(self):
         """Calculates scores for each user
@@ -139,14 +146,21 @@ class ReversiGame:
         return self.winner
 
     def is_terminated(self, row, col):
+        """Determines if game is terminated based on various conditions
+
+        Args:
+            row, col: input of location to check if able to make a move  
+        """
         scores = self.score_book
         black_score = scores["X"]
         white_score = scores["O"]
 
         if self.make_move(row, col) == False:
             return True
-        elif black_score <= 0 >= white_score:
-            return True 
+        elif black_score == 0 or white_score == 0:
+            return True
+        # elif len(self.get_moves()) == 0:
+        #     return True
 
 
        
