@@ -1,5 +1,6 @@
 from model.board import Board
 from model.players import Players
+import copy
 
 class ReversiGame:
     """Represents game. Including board, players, 
@@ -10,8 +11,7 @@ class ReversiGame:
         self.curr_player = None
         self.black_disk = Players.BLACK_DISK
         self.white_disk = Players.WHITE_DISK
-        self.score_book = {}
-
+        
     def change_player(self):
         """Changes player, used for each turn of the game.
         """
@@ -97,7 +97,7 @@ class ReversiGame:
         #     return False
 
     def get_moves(self):
-        """Returns list of valid moves for AI use
+        """Returns list of valid moves
         """
         valid_moves = []
         for row in range(self.board.size):
@@ -106,25 +106,23 @@ class ReversiGame:
                     valid_moves.append([row, col])
         return valid_moves
 
-    #def computer_move(self):
-
-    def get_scores(self):
-        """Calculates scores for each user
-
-        Returns:
-            score_book(dict): dictionary of player scores
+    def computer_move(self):
+        """Returns best move for computer to make based on one step lookahead
         """
-        black_score = 0
-        white_score = 0
-        for r in range(self.board.size):
-            for c in range(self.board.size):
-                if self.board.get_location(r, c) == Players.BLACK_DISK:
-                    black_score += 1
-                if self.board.get_location(r, c) == Players.WHITE_DISK:
-                    white_score += 1
+        valid_moves = self.get_moves()
+        best_score = -1
+        for r,c in valid_moves:
+            board_copy = copy.deepcopy(self.board)
+            board_copy.update_location(r, c, self.curr_player)
+            
+            black_score = board_copy.score_book["X"]
+            white_score = board_copy.score_book["O"]
+            score = white_score - black_score
+            if score > best_score:
+                best_move = r, c
+                best_score = score
 
-        self.score_book = {"X":black_score, "O":white_score}
-        return self.score_book
+        return best_move
 
     def get_winner(self):
         """Calculates winning score from score book
@@ -132,9 +130,8 @@ class ReversiGame:
         Returns:
             winner(player): player with the winning score / tie
         """
-        scores = self.score_book
-        black_score = scores["X"]
-        white_score = scores["O"]
+        black_score = self.board.score_book["X"]
+        white_score = self.board.score_book["O"]
 
         if black_score > white_score:
             self.winner = Players.BLACK_DISK
@@ -151,16 +148,16 @@ class ReversiGame:
         Args:
             row, col: input of location to check if able to make a move  
         """
-        scores = self.score_book
-        black_score = scores["X"]
-        white_score = scores["O"]
-
+        black_score = self.board.score_book["X"]
+        white_score = self.board.score_book["O"]
+        moves = len(self.get_moves())
+        
         if self.make_move(row, col) == False:
             return True
-        elif black_score == 0 or white_score == 0:
+        elif black_score == 0 or white_score == 0:  
             return True
-        # elif len(self.get_moves()) == 0:
-        #     return True
+        elif moves == 0:
+            return True
 
 
        

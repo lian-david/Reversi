@@ -9,7 +9,8 @@ class ReversiUser:
         except ValueError:
             print("Input must be numeric.")
 
-        return board_size 
+        if board_size > 0:
+            return board_size 
 
     def get_rules():
         """Retrieves rules for game from user
@@ -17,8 +18,14 @@ class ReversiUser:
         rules = input("Enter the game type (classical, alternative): ")
         return rules
 
-    def get_AI():
-        pass
+    def get_players():
+        """Retreives game player choices from user
+        """
+        print("Would you like to play against another player? [p]")
+        ans = input("Or would you like to play against the computer? [c] ").lower()
+        if ans != "p" and ans != "c":
+            ans = input("Please enter a valid option: ").lower()
+        return ans
 
     def display_menu():
         """Displays starting menu.

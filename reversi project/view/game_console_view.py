@@ -29,7 +29,7 @@ class GameConsoleView:
         """Displays board from game.
         """
         self.board_view.draw_board()
-        scores = self.game.get_scores()
+        scores = self.game.board.get_scores()
         print(f'X score: {scores["X"]}, O score: {scores["O"]}')
         print(f'Player {GameConsoleView.symbols[self.game.curr_player]}: It\'s your turn.')
         

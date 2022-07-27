@@ -20,6 +20,8 @@ class Board:
         self._board[self.mid][self.mid] = Players.WHITE_DISK
         self._board[self.mid - 1][self.mid] = Players.BLACK_DISK
         self._board[self.mid][self.mid - 1] = Players.BLACK_DISK
+        
+        self.score_book = {}
 
     def get_location(self, row, col):
         """Retrieves board location
@@ -49,3 +51,21 @@ class Board:
         """
         return row >= 0 and row <= self.size - 1 \
              and col >= 0 and col <= self.size - 1
+
+    def get_scores(self):
+        """Calculates scores for each player
+
+        Returns:
+            score_book(dict): dictionary of player scores
+        """
+        black_score = 0
+        white_score = 0
+        for r in range(self.size):
+            for c in range(self.size):
+                if self.get_location(r, c) == Players.BLACK_DISK:
+                    black_score += 1
+                if self.get_location(r, c) == Players.WHITE_DISK:
+                    white_score += 1
+
+        self.score_book = {"X":black_score, "O":white_score}
+        return self.score_book
