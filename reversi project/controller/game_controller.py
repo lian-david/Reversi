@@ -1,5 +1,6 @@
 from view.game_console_view import GameConsoleView
 from model.reversi_game import ReversiGame
+from model.ai_player import AI
 from datetime import datetime
 
 class GameController:
@@ -13,6 +14,7 @@ class GameController:
         """
         self.model = model
         self.view = view
+        self.AI_play = AI(model)
 
     def run_game(self, choice, players):
         """Runs game
@@ -42,7 +44,7 @@ class GameController:
                     row, col = self.view.get_move()
                     self.model.make_move(row, col)
                     self.model.change_player()
-                    row, col = self.model.computer_move()
+                    row, col = self.AI_play.computer_move()
                     if self.model.is_terminated(row, col):
                         player = self.model.get_winner()
                         self.view.display_winner(player)

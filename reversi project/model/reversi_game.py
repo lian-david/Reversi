@@ -1,6 +1,5 @@
 from model.board import Board
 from model.players import Players
-import copy
 
 class ReversiGame:
     """Represents game. Including board, players, 
@@ -85,7 +84,7 @@ class ReversiGame:
 
     def make_move(self, row, col):
         """Makes move if it is valid.
-        
+
         Args:
             row(int): row index from user input
             col(int): col index from user input
@@ -105,7 +104,7 @@ class ReversiGame:
         #         self.board.update_location(r, c, self.curr_player)
         # else:
         #     return False
-
+        
     def get_moves(self):
         """Returns list of valid moves
 
@@ -118,28 +117,7 @@ class ReversiGame:
                 if self.is_valid_move(row, col) != False:
                     valid_moves.append([row, col])
         return valid_moves
-
-    def computer_move(self):
-        """Returns best move for computer to make based on one step lookahead
-
-        Returns:
-            best_move(tuple): row and column indices for computer play 
-        """
-        valid_moves = self.get_moves()
-        best_score = -1
-        for r,c in valid_moves:
-            board_copy = copy.deepcopy(self.board)
-            board_copy.update_location(r, c, self.curr_player)
-            
-            black_score = board_copy.score_book["X"]
-            white_score = board_copy.score_book["O"]
-            score = white_score - black_score
-            if score > best_score:
-                best_move = r, c
-                best_score = score
-
-        return best_move
-
+  
     def get_winner(self):
         """Calculates winning score from score book
 
