@@ -6,6 +6,10 @@ class GameController:
     def __init__(self, model: ReversiGame, view: GameConsoleView):
         """Initializes controller attributes to reversi game and view, 
             allowing user to input and view display.
+
+        Args:
+            model(ReversiGame): the ReversiGame object
+            view(GameConsoleView): the console view of ReversiGame
         """
         self.model = model
         self.view = view

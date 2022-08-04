@@ -6,6 +6,9 @@ class BoardConsoleView:
     symbols = {0: " ", 1: "X", 2: "O"}
     def __init__(self, board: Board):
         """Initializes attributes as board object 
+
+        Args:
+            board(Board): the board object representing game board
         """
         self.board = board
 

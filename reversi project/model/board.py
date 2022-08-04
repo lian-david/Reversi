@@ -27,8 +27,8 @@ class Board:
         """Retrieves board location
         
         Args:
-            row(list): row index of board matrix
-            col(list): column index of board matrix
+            row(int): row index of board matrix
+            col(int): column index of board matrix
         """
         return self._board[row][col]
 
@@ -36,8 +36,8 @@ class Board:
         """Updates board location
         
         Args:
-            row(list): row index of board matrix
-            col(list): column index of board matrix
+            row(int): row index of board matrix
+            col(int): column index of board matrix
             player(Players): the current player 
         """
         self._board[row][col] = player
@@ -46,8 +46,8 @@ class Board:
         """Returns True/False if row, col are within board range 
 
         Args:
-            row(list): row index of board matrix
-            col(list): column index of board matrix
+            row(int): row index of board matrix
+            col(int): column index of board matrix
         """
         return row >= 0 and row <= self.size - 1 \
              and col >= 0 and col <= self.size - 1

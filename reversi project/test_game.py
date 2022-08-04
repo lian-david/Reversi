@@ -5,7 +5,8 @@ from controller.game_controller import GameController
 
 choice = ReversiUser.display_menu()
 players = ReversiUser.get_players()
-game = ReversiGame(ReversiUser.get_board_size())
+size = ReversiUser.get_board_size()
+game = ReversiGame(size)
 view = GameConsoleView(game)
 controller = GameController(game, view)
 controller.run_game(choice, players)

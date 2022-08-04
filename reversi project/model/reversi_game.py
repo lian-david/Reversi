@@ -7,28 +7,34 @@ class ReversiGame:
         classical rules, alternative rules.
     """
     def __init__(self, board_size):
+        """Initializes game attributes 
+
+        Args:
+            board_size(int): size of board from user input
+        """
         self.board = Board(board_size)
         self.curr_player = None
-        self.black_disk = Players.BLACK_DISK
-        self.white_disk = Players.WHITE_DISK
         
     def change_player(self):
         """Changes player, used for each turn of the game.
         """
         if self.curr_player is None:
-            self.curr_player = self.black_disk
+            self.curr_player = Players.BLACK_DISK
         else:
-            if self.curr_player == self.black_disk:
-                self.curr_player = self.white_disk
+            if self.curr_player == Players.BLACK_DISK:
+                self.curr_player = Players.WHITE_DISK
             else:
-                self.curr_player = self.black_disk
+                self.curr_player = Players.BLACK_DISK
 
     def is_valid_move(self, row, col):
         """Determines if move is valid.
-        
+
+        Args:
+            row(int): row index from user input
+            col(int): col index from user input
         Returns:
-                T/F if player's move is valid according to classical rules.
-                spaces_flip(list): list of locations if the move is valid.
+            T/F if player's move is valid according to classical rules.
+            spaces_flip(list): list of locations if the move is valid.
         """
         if self.board._board[row][col] != self.board.EMPTY_CELL or not self.board.valid_location(row, col):
             return False
@@ -79,6 +85,10 @@ class ReversiGame:
 
     def make_move(self, row, col):
         """Makes move if it is valid.
+        
+        Args:
+            row(int): row index from user input
+            col(int): col index from user input
         """
         spaces_flip = self.is_valid_move(row, col)
         if spaces_flip == False:
@@ -98,6 +108,9 @@ class ReversiGame:
 
     def get_moves(self):
         """Returns list of valid moves
+
+        Returns:
+            valid_moves(list): list of tuples referring to valid row/col indices for play 
         """
         valid_moves = []
         for row in range(self.board.size):
@@ -108,6 +121,9 @@ class ReversiGame:
 
     def computer_move(self):
         """Returns best move for computer to make based on one step lookahead
+
+        Returns:
+            best_move(tuple): row and column indices for computer play 
         """
         valid_moves = self.get_moves()
         best_score = -1
@@ -146,7 +162,8 @@ class ReversiGame:
         """Determines if game is terminated based on various conditions
 
         Args:
-            row, col: input of location to check if able to make a move  
+            row(int): row index from user input
+            col(int): col index from user input  
         """
         black_score = self.board.score_book["X"]
         white_score = self.board.score_book["O"]
