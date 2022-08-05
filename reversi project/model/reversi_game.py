@@ -2,9 +2,7 @@ from model.board import Board
 from model.players import Players
 
 class ReversiGame:
-    """Represents game. Including board, players, 
-        classical rules, alternative rules.
-    """
+    """Represents game logic. Including players, classical rules, alternative rules."""
     def __init__(self, board_size):
         """Initializes game attributes 
 
@@ -17,6 +15,7 @@ class ReversiGame:
     def change_player(self):
         """Changes player, used for each turn of the game.
         """
+        #black disk always plays first 
         if self.curr_player is None:
             self.curr_player = Players.BLACK_DISK
         else:
@@ -35,9 +34,10 @@ class ReversiGame:
             T/F if player's move is valid according to classical rules.
             spaces_flip(list): list of locations if the move is valid.
         """
-        if self.board._board[row][col] != self.board.EMPTY_CELL or not self.board.valid_location(row, col):
+        if self.board.get_location(row, col) != self.board.EMPTY_CELL \
+            or not self.board.valid_location(row, col):
             return False
-        self.board._board[row][col] = self.curr_player     #set player in location for checking
+        self.board.update_location(row, col, self.curr_player)     #set player in location for checking
         if self.curr_player == Players.BLACK_DISK:
             other_play = Players.WHITE_DISK
         else:
@@ -51,12 +51,12 @@ class ReversiGame:
             r += row_direct
             c += col_direct
             #determines if there is other player's disk next to our disk
-            if self.board.valid_location(r, c) and self.board._board[r][c] == other_play:
+            if self.board.valid_location(r, c) and self.board.get_location(r, c) == other_play:
                 r += row_direct
                 c += col_direct
                 if not self.board.valid_location(r, c):
                     continue
-                while self.board._board[r][c] == other_play:
+                while self.board.get_location(r, c) == other_play:
                     r += row_direct
                     c += col_direct
                     if not self.board.valid_location(r, c):
@@ -64,7 +64,7 @@ class ReversiGame:
                 if not self.board.valid_location(r, c):
                     continue
                 #locate pieces to flip and add locations to list 
-                if self.board._board[r][c] == self.curr_player:
+                if self.board.get_location(r, c) == self.curr_player:
                     while True:
                         r -= row_direct
                         c -= col_direct
@@ -73,14 +73,12 @@ class ReversiGame:
                         spaces_flip.append([r, c])
 
         #return empty location after performing possible move
-        self.board._board[row][col] = self.board.EMPTY_CELL
+        self.board.update_location(row, col, self.board.EMPTY_CELL)
         #return F for no spaces to flip
         if len(spaces_flip) == 0:
             return False
         
         return spaces_flip
-
-        #for alt rules just return spaces flip without checking len?
 
     def make_move(self, row, col):
         """Makes move if it is valid.
@@ -97,13 +95,21 @@ class ReversiGame:
         for r, c in spaces_flip:
             self.board.update_location(r, c, self.curr_player)
         return True
-        #spaces_flip = self.is_valid_move(row, col)
-        # if spaces_flip:
-        #     self.board.update_location(row, col, self.curr_player)
-        #     for r, c in spaces_flip:
-        #         self.board.update_location(r, c, self.curr_player)
-        # else:
-        #     return False
+
+    def make_move_alt(self, row, col):
+        """Makes move if it is valid according to alternative rules, which allow player to place
+            disk at any location. 
+
+        Args:
+            row(int): row index from user input
+            col(int): col index from user input
+        """
+        self.board.update_location(row, col, self.curr_player)
+
+        spaces_flip = self.is_valid_move(row, col)
+        if spaces_flip:
+            for r, c in spaces_flip:
+                self.board.update_location(r, c, self.curr_player)
         
     def get_moves(self):
         """Returns list of valid moves
@@ -127,6 +133,7 @@ class ReversiGame:
         black_score = self.board.score_book["X"]
         white_score = self.board.score_book["O"]
 
+        #check how scores compare to determine winner 
         if black_score > white_score:
             self.winner = Players.BLACK_DISK
         elif white_score > black_score:
@@ -153,6 +160,3 @@ class ReversiGame:
             return True
         elif moves == 0:
             return True
-
-
-       

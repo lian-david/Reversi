@@ -16,10 +16,12 @@ class GameController:
         self.view = view
         self.AI_play = AI(model)
 
-    def run_game(self, choice, players):
+    def run_game(self, rules, players):
         """Runs game
         """
-        while choice == "s":
+        #play game with classical rules
+        while rules == "c":
+            #play game against another human player
             while players == "p":
                 while True:
                     self.model.change_player()
@@ -37,6 +39,7 @@ class GameController:
                     else:
                         self.model.make_move(row, col)
                 break
+            #play game against simple AI
             while players == "c":
                 while True:
                     self.model.change_player()
@@ -54,7 +57,46 @@ class GameController:
                         self.model.make_move(row, col)
                 break
             break
+        #play game with alternative rules
+        while rules == "a":
+            #play game against another human player
+            while players == "p":
+                while True:
+                    self.model.change_player()
+                    self.view.draw_board()
+                    row, col = self.view.get_move()
+                    self.model.make_move_alt(row, col)
+                    self.model.change_player()
+                    self.view.draw_board()
+                    row, col = self.view.get_move()
+                    if self.model.is_terminated(row, col):
+                        player = self.model.get_winner()
+                        self.view.display_winner(player)
+                        print("Thanks for playing!")
+                        break
+                    else:
+                        self.model.make_move_alt(row, col)
+                break
+            #play game against simple AI
+            while players == "c":
+                while True:
+                    self.model.change_player()
+                    self.view.draw_board()
+                    row, col = self.view.get_move()
+                    self.model.make_move_alt(row, col)
+                    self.model.change_player()
+                    row, col = self.AI_play.computer_move()
+                    if self.model.is_terminated(row, col):
+                        player = self.model.get_winner()
+                        self.view.display_winner(player)
+                        print("Thanks for playing!")
+                        break
+                    else:
+                        self.model.make_move(row, col)
+                break
+            break
         
+        #save game results to text file
         today = datetime.now()
         start = today.strftime("%m/%d/%Y %H:%M:%S")
         p_view = self.view.symbols[player]

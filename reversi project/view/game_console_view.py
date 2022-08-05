@@ -14,15 +14,52 @@ class GameConsoleView:
         self.game = game
         self.board_view = BoardConsoleView(game.board)
 
+    def display_menu():
+        """Displays starting menu.
+
+        Returns:
+            rules(str): user input for game logic
+            ans(str): user input for player choice
+            board_size(int): user input for board size 
+        """
+        print("----------Welcome to Reversi----------")
+        rules = input("Enter the game type (classical [c], alternative [a]): ").lower()
+        if rules != "c" and rules != "a":
+            rules = input("Please enter a valid option: ").lower()
+
+        print("Would you like to play against another player? [p]")
+        ans = input("Or would you like to play against the simple computer player? [c] ").lower()
+        if ans != "p" and ans != "c":
+            ans = input("Please enter a valid option: ").lower()
+
+        try: 
+            board_size = int(input("Enter the board size: "))
+        except ValueError:
+            board_size = int(input("Input must be numeric. Enter the board size: "))
+        if board_size <= 0:
+            board_size = int(input("Please enter a positive board size: "))
+        
+        return rules, ans, board_size
+
     def get_move(self):
         """Retreives move from user 
 
         Returns:
-            row, col: location of move 
+            row, col(tuple): location of move 
         """
-        move = input("Enter your move (row, col):").split(",")
-        row = int(move[0]) - 1
-        col = int(move[1]) - 1
+        try:
+            move = input("Enter your move (row, col): ").split(",")
+            row = int(move[0]) - 1
+            col = int(move[1]) - 1
+        except IndexError:
+            move = input("Please enter a valid move: ").split(",")
+            row = int(move[0]) - 1
+            col = int(move[1]) - 1
+        except ValueError:
+            move = input("Please enter a valid move: ").split(",")
+            row = int(move[0]) - 1
+            col = int(move[1]) - 1
+        
         return row, col
 
     def draw_board(self):
@@ -43,15 +80,3 @@ class GameConsoleView:
                 print(f'Player {GameConsoleView.symbols[winner]} has won!') 
             else:
                 print(GameConsoleView.symbols[winner])
-
-    def display_menu(self):
-        """Displays starting menu.
-
-        Returns:
-            ans(str): user input
-        """
-        print("Would you like to start a new game? [s]")
-        ans = input("Or would you like to end session? [e] ").lower()
-        if ans != "s" and ans != "e":
-            ans = input("Please enter a valid option: ").lower()
-        return ans

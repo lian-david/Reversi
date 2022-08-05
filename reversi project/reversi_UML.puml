@@ -1,12 +1,12 @@
 @startuml Reversi
 
-
 class ReversiGame{
     -board_size
     +change_player()
-    +make_move()
     +is_valid_move()
-    +check_winner()
+    +make_move()
+    +get_moves()
+    +get_winner()
     +is_terminated()
 }
 
@@ -14,6 +14,8 @@ class Board{
     -size
     +get_location()
     +update_location()
+    +valid_location()
+    +get_scores()
 }
 
 class Players{
@@ -21,19 +23,22 @@ class Players{
     WHITE_DISK
 }
 
+class AI{
+    -game 
+    +computer_move
+}
 
 class GameView{
     -game
+    +get_move()
     +draw_board()
     +display_winner()
-    +get_move()
 }
 
 class BoardView{
     -board
     +draw_board()
 }
-
 
 class GameController{
     -model
@@ -44,8 +49,11 @@ class GameController{
 GameController o-- ReversiGame
 ReversiGame o-- Board
 ReversiGame o-- Players
+BoardView o-- Board
 GameView o-- BoardView
 GameView o-- ReversiGame
 GameController o-- GameView
+AI o-- ReversiGame
+GameController o-- AI 
 
 @enduml 

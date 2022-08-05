@@ -60,12 +60,15 @@ class Board:
         """
         black_score = 0
         white_score = 0
+        empty = 0
         for r in range(self.size):
             for c in range(self.size):
                 if self.get_location(r, c) == Players.BLACK_DISK:
                     black_score += 1
                 if self.get_location(r, c) == Players.WHITE_DISK:
                     white_score += 1
+                if self.get_location(r, c) == Board.EMPTY_CELL:
+                    empty += 1
 
-        self.score_book = {"X":black_score, "O":white_score}
+        self.score_book = {"X":black_score, "O":white_score, "E":empty}
         return self.score_book

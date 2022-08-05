@@ -1,3 +1,12 @@
 Date and Time: 07/27/2022 09:20:44, Winning Player/Draw: X, Scores: X: 4, O: 1
 Date and Time: 07/27/2022 09:22:34, Winning Player/Draw: It's a tie!, Scores: X: 3, O: 3
 Date and Time: 07/27/2022 10:44:05, Winning Player/Draw: O, Scores: X: 1, O: 6
+Date and Time: 08/05/2022 09:27:33, Winning Player/Draw: O, Scores: X: 0, O: 11
+Date and Time: 08/05/2022 11:30:59, Winning Player/Draw: X, Scores: X: 4, O: 1
+Date and Time: 08/05/2022 11:32:44, Winning Player/Draw: It's a tie!, Scores: X: 2, O: 2
+Date and Time: 08/05/2022 11:33:34, Winning Player/Draw: X, Scores: X: 7, O: 2
+Date and Time: 08/05/2022 12:49:59, Winning Player/Draw: X, Scores: X: 4, O: 1
+Date and Time: 08/05/2022 12:50:32, Winning Player/Draw: X, Scores: X: 5, O: 2
+Date and Time: 08/05/2022 12:51:11, Winning Player/Draw: O, Scores: X: 0, O: 6
+Date and Time: 08/05/2022 13:24:26, Winning Player/Draw: It's a tie!, Scores: X: 3, O: 3
+Date and Time: 08/05/2022 13:56:10, Winning Player/Draw: O, Scores: X: 0, O: 9
