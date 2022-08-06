@@ -104,13 +104,13 @@ class ReversiGame:
             row(int): row index from user input
             col(int): col index from user input
         """
-        self.board.update_location(row, col, self.curr_player)
-
         spaces_flip = self.is_valid_move(row, col)
         if spaces_flip:
             for r, c in spaces_flip:
                 self.board.update_location(r, c, self.curr_player)
-        
+                
+        self.board.update_location(row, col, self.curr_player)
+
     def get_moves(self):
         """Returns list of valid moves
 
@@ -123,25 +123,6 @@ class ReversiGame:
                 if self.is_valid_move(row, col) != False:
                     valid_moves.append([row, col])
         return valid_moves
-  
-    def get_winner(self):
-        """Calculates winning score from score book
-
-        Returns:
-            winner(player): player with the winning score / tie
-        """
-        black_score = self.board.score_book["X"]
-        white_score = self.board.score_book["O"]
-
-        #check how scores compare to determine winner 
-        if black_score > white_score:
-            self.winner = Players.BLACK_DISK
-        elif white_score > black_score:
-            self.winner = Players.WHITE_DISK
-        elif black_score == white_score:
-            self.winner = 3
-
-        return self.winner
 
     def is_terminated(self, row, col):
         """Determines if game is terminated based on various conditions

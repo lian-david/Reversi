@@ -72,3 +72,22 @@ class Board:
 
         self.score_book = {"X":black_score, "O":white_score, "E":empty}
         return self.score_book
+
+    def get_winner(self):
+        """Calculates winning score from score book
+
+        Returns:
+            winner(player): player with the winning score / tie
+        """
+        black_score = self.score_book["X"]
+        white_score = self.score_book["O"]
+
+        #check how scores compare to determine winner 
+        if black_score > white_score:
+            winner = Players.BLACK_DISK
+        elif white_score > black_score:
+            winner = Players.WHITE_DISK
+        elif black_score == white_score:
+            winner = 3
+
+        return winner
