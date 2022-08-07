@@ -2,6 +2,7 @@ from view.board_console_view import BoardConsoleView
 from model.reversi_game import ReversiGame
 from model.user_player import UserPlayer
 from model.ai_player import AI
+from model.ai_minimax import AdvancedAI
 
 class GameConsoleView:
     """Represents game in console, allows user to input plays
@@ -31,15 +32,17 @@ class GameConsoleView:
             rules = input("Please enter a valid option: ").lower()
 
         print("\nWould you like to play against another player? [p]")
-        print("Or would you like to play against the advanced computer player? [a]")
-        players = input("Or would you like to play against the simple computer player? [c]: ").lower()
+        print("Or would you like to play against the simple computer player? [c]")
+        players = input("Or would you like to play against the advanced computer player? [a]: ").lower()
         if players != "p" and players != "c" and players != "a":
             players = input("Please enter a valid option: ").lower()
 
         if players == "p":
             players = [UserPlayer, UserPlayer]
-        if players == "c" or players == "a":
+        elif players == "c":
             players = [UserPlayer, AI]
+        elif players == "a":
+            players = [UserPlayer, AdvancedAI]
 
         try: 
             board_size = int(input("\nEnter the board size: "))

@@ -133,11 +133,14 @@ class ReversiGame:
         """
         black_score = self.board.score_book["X"]
         white_score = self.board.score_book["O"]
+        is_full = self.board.score_book["E"]
         moves = len(self.get_moves())
         
         if self.make_move(row, col) == False:
             return True
         elif black_score == 0 or white_score == 0:  
             return True
+        elif is_full == 0:
+            return True 
         elif moves == 0:
             return True

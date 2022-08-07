@@ -2,6 +2,7 @@ from view.game_console_view import GameConsoleView
 from model.reversi_game import ReversiGame
 from model.user_player import UserPlayer
 from model.ai_player import AI
+from model.ai_minimax import AdvancedAI
 from datetime import datetime
 
 class GameController:
@@ -12,6 +13,8 @@ class GameController:
         Args:
             model(ReversiGame): the ReversiGame object
             view(GameConsoleView): the console view of ReversiGame
+            black_disk(UserPlayer): the user player
+            white_disk(any): varies depending on player choice of opponent 
         """
         self.model = model
         self.view = view
@@ -19,11 +22,13 @@ class GameController:
         self.white_disk = white_disk
         if issubclass(white_disk, AI):
             self.white_disk = AI(model)
+        elif issubclass(white_disk, AdvancedAI):
+            self.white_disk = AdvancedAI(model)
         else:
             self.white_disk = UserPlayer()
 
     def run_game(self, rules):
-        """Runs game
+        """Runs game based on logic conditions.
         """
         #play game with classical rules
         while rules == "c":
@@ -35,7 +40,15 @@ class GameController:
                 self.model.change_player()
                 if isinstance(self.white_disk, UserPlayer):
                     self.view.draw_board()
-                row, col = self.white_disk.get_move()
+                if isinstance(self.white_disk, AI):
+                    try: 
+                        row, col = self.white_disk.get_move()
+                    except UnboundLocalError:
+                        player = self.model.board.get_winner()
+                        self.view.display_winner(player)
+                        break
+                else:
+                    row, col = self.white_disk.get_move()
                 if self.model.is_terminated(row, col):
                     player = self.model.board.get_winner()
                     self.view.display_winner(player)
@@ -53,7 +66,15 @@ class GameController:
                 self.model.change_player()
                 if isinstance(self.white_disk, UserPlayer):
                     self.view.draw_board()
-                row, col = self.white_disk.get_move()
+                if isinstance(self.white_disk, AI):
+                    try: 
+                        row, col = self.white_disk.get_move()
+                    except UnboundLocalError:
+                        player = self.model.board.get_winner()
+                        self.view.display_winner(player)
+                        break
+                else:
+                    row, col = self.white_disk.get_move()
                 if self.model.is_terminated(row, col):
                     player = self.model.board.get_winner()
                     self.view.display_winner(player)
