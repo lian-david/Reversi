@@ -28,6 +28,11 @@ class AI{
     +get_move()
 }
 
+class AdvancedAI{
+    -game 
+    +get_move()
+}
+
 class UserPlayer{
     +get_move()
 }
@@ -58,6 +63,8 @@ GameView o-- BoardView
 GameView o-- ReversiGame
 GameController o-- GameView
 AI o-- ReversiGame
+AdvancedAI o-- ReversiGame
+GameController o-- AdvancedAI
 GameController o-- AI 
 GameController o-- UserPlayer
 
