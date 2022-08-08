@@ -17,7 +17,7 @@ class AI:
             best_move(tuple): row and column indices for computer play 
         """
         valid_moves = self.game.get_moves()
-        best_score = -1
+        best_score = -10 
         for r,c in valid_moves:
             board_copy = copy.deepcopy(self.board)
             board_copy.update_location(r, c, self.player)

@@ -40,13 +40,11 @@ class GameController:
                 self.model.change_player()
                 if isinstance(self.white_disk, UserPlayer):
                     self.view.draw_board()
-                if isinstance(self.white_disk, AI):
+                if isinstance(self.white_disk, AI) or isinstance(self.white_disk, AdvancedAI):
                     try: 
                         row, col = self.white_disk.get_move()
                     except UnboundLocalError:
-                        player = self.model.board.get_winner()
-                        self.view.display_winner(player)
-                        break
+                        print("The computer player cannot make a move.")
                 else:
                     row, col = self.white_disk.get_move()
                 if self.model.is_terminated(row, col):
@@ -66,13 +64,11 @@ class GameController:
                 self.model.change_player()
                 if isinstance(self.white_disk, UserPlayer):
                     self.view.draw_board()
-                if isinstance(self.white_disk, AI):
+                if isinstance(self.white_disk, AI) or isinstance(self.white_disk, AdvancedAI):
                     try: 
                         row, col = self.white_disk.get_move()
                     except UnboundLocalError:
-                        player = self.model.board.get_winner()
-                        self.view.display_winner(player)
-                        break
+                        print("The computer player cannot make a move.")
                 else:
                     row, col = self.white_disk.get_move()
                 if self.model.is_terminated(row, col):
