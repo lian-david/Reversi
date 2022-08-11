@@ -6,7 +6,7 @@ from model.ai_minimax import AdvancedAI
 from datetime import datetime
 
 class GameController:
-    def __init__(self, model: ReversiGame, view: GameConsoleView, black_disk: UserPlayer, white_disk):
+    def __init__(self, model: ReversiGame, view: GameConsoleView, black_disk: UserPlayer, white_disk, rules):
         """Initializes controller attributes to reversi game and view, 
             allowing user to input and view display.
 
@@ -26,12 +26,13 @@ class GameController:
             self.white_disk = AdvancedAI(model)
         else:
             self.white_disk = UserPlayer()
+        self.rules = rules
 
-    def run_game(self, rules):
+    def run_game(self):
         """Runs game based on logic conditions.
         """
         #play game with classical rules
-        while rules == "c":
+        while self.rules == "c":
             while True:
                 self.model.change_player()
                 self.view.draw_board()
@@ -55,7 +56,7 @@ class GameController:
                     self.model.make_move(row, col)
             break
         #play game with alternative rules
-        while rules == "a":
+        while self.rules == "a":
             while True:
                 self.model.change_player()
                 self.view.draw_board()
