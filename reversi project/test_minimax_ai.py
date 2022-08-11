@@ -14,4 +14,3 @@ class TestAdvancedAI(unittest.TestCase):
     def test_get_move_error(self):
         with self.assertRaises(UnboundLocalError):
             self.AI.get_move()
-        
